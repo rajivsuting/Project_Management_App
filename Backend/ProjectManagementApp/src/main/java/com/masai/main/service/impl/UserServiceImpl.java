@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
         user.setName(name);
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(password));
-
+        
         Role userRole = roleRepository.findByRoleName(role)
                 .orElseThrow(() -> new RuntimeException("Role not found"));
 
@@ -47,6 +47,8 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.save(user);
 	}
+
+
 
 
 

@@ -14,11 +14,13 @@ public class SecurityConfig {
 	
 	
 	@Bean
-	SecurityFilterChain securityFilters(HttpSecurity http) throws Exception {
+	public SecurityFilterChain securityFilters(HttpSecurity http) throws Exception {
 		
 		
 		http.authorizeHttpRequests(auth ->{ auth
 			.requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+			.requestMatchers(HttpMethod.GET, "/role/create").permitAll()
+			.requestMatchers("/swagger-ui*/**","/v3/api-docs/**").permitAll()
 			.anyRequest().authenticated();
 				
 		})

@@ -32,5 +32,9 @@ public class UserController {
     public ResponseEntity<String> hello(){
     	return new ResponseEntity<String>("hello",HttpStatus.OK);
     }
+    @GetMapping("/admin")
+    public ResponseEntity<String> helloAdmin(){
+    	return new ResponseEntity<String>("hello admin",HttpStatus.OK);
+    }
 
 }
