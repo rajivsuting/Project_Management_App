@@ -20,6 +20,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(auth ->{ auth
 			.requestMatchers(HttpMethod.POST, "/user/register").permitAll()
 			.requestMatchers(HttpMethod.GET, "/role/create").permitAll()
+			.requestMatchers(HttpMethod.GET, "/user/hello","/user/all","/user/**").hasRole("ADMIN")
 			.requestMatchers("/swagger-ui*/**","/v3/api-docs/**").permitAll()
 			.anyRequest().authenticated();
 				

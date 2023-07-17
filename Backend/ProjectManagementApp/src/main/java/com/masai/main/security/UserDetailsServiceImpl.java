@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.masai.main.entity.UserEntity;
+import com.masai.main.exception.UserException;
 import com.masai.main.repository.UserRepository;
 
 
@@ -20,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+                .orElseThrow(() -> new UserException("User not found with username: " + username));
 
         return new CustomUserDetails(user);
 	}

@@ -1,9 +1,12 @@
 package com.masai.main.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,13 +31,22 @@ public class UserController {
 
     }
     
-    @GetMapping("/hello")
-    public ResponseEntity<String> hello(){
-    	return new ResponseEntity<String>("hello",HttpStatus.OK);
+    @GetMapping("/all")
+    public ResponseEntity<List<UserEntity>> getAllUsers(){
+    	
+    	return 	new ResponseEntity<List<UserEntity>>(userService.getAllUsers(), HttpStatus.OK);
     }
-    @GetMapping("/admin")
-    public ResponseEntity<String> helloAdmin(){
-    	return new ResponseEntity<String>("hello admin",HttpStatus.OK);
+    
+    @GetMapping("/{email}")
+    public ResponseEntity<UserEntity> getUserByEmail(@PathVariable("email") String email){
+    	
+    	return new ResponseEntity<UserEntity>(userService.getUserByEmail(email), HttpStatus.OK);
     }
+    
+    public ResponseEntity<String> deleteUser(@PathVariable("email") String email){
+    	
+    	return new ResponseEntity<String>(userService.deleteUser(email), HttpStatus.OK);
+    }
+    
 
 }

@@ -1,5 +1,6 @@
 package com.masai.main.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -48,5 +49,8 @@ public class UserEntity {
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
+    
+    @ManyToMany(mappedBy = "members")
+    private Set<Project> projects = new HashSet<>();
 
 }

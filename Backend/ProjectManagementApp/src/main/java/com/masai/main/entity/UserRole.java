@@ -2,6 +2,6 @@ package com.masai.main.entity;
 
 public enum UserRole {
 	
-	ADMIN,USER
+	ROLE_ADMIN,ROLE_USER
 
 }
