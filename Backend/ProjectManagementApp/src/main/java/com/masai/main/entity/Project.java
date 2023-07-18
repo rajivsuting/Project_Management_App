@@ -1,12 +1,11 @@
 package com.masai.main.entity;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -43,11 +42,10 @@ public class Project {
 
     @ManyToOne
     @JoinColumn(name = "manager_id")
-    @JsonBackReference // Use this annotation to prevent circular reference
+    @JsonBackReference 
     private UserEntity manager;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    @JsonManagedReference // Use this annotation to handle the relationship
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Task> tasks = new HashSet<>();
 
     @ManyToMany
@@ -56,7 +54,7 @@ public class Project {
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "member_id")
     )
-    @JsonManagedReference // Use this annotation to handle the relationship
+    @JsonIgnore
     private Set<UserEntity> members = new HashSet<>();
 
 }
